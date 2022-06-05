@@ -2,8 +2,12 @@ import Image from 'next/image'
 import React from 'react'
 import {ChevronDownIcon, HomeIcon, SearchIcon, MenuIcon} from '@heroicons/react/solid'
 import {BellIcon, ChatIcon, GlobeIcon, PlusIcon, SparklesIcon, SpeakerphoneIcon, VideoCameraIcon} from '@heroicons/react/outline'
+import { signIn, signOut, useSession } from 'next-auth/react'
 
 const Header = () => {
+
+  const { data: session } = useSession()
+
   return (
     <div className='sticky top-0 z-50 flex bg-white px-4 py-2 shadow-sm'>
         <div className='relative h-10 w-20 flex-shrink-0 cursor-pointer '>
@@ -37,12 +41,28 @@ const Header = () => {
           <MenuIcon className='icon'/>
         </div>
       {/* Sign In / Sign Out button */}
-        <div className='hidden lg:flex items-center space-x-2 border border-grey-100 p-2 cursor-pointer'>
-          <div className='relative h-5 w-5 flex-shrink-0'>
+
+      {session ? (
+        <div onClick={() => signOut()} className='hidden lg:flex items-center space-x-2 border border-grey-100 p-2 cursor-pointer'>
+        <div className='relative h-5 w-5 flex-shrink-0'>
           <Image objectFit='contain' src="https://pngset.com/images/reddit-logo-icon-free-download-stencil-pottery-symbol-silhouette-transparent-png-2207129.png" layout='fill' alt="" />
+        </div>
+        <div className='flex-1 text-xs'>
+          <p className='truncate'>{session?.user?.name}</p>
+          <p className='text-grey-400'>Sign Out</p>
+        </div>
+       
+        <ChevronDownIcon className='h-5 flex-shrink-0 text-grey-400'/>
+      </div>
+      ):(
+        <div onClick={() => signIn()} className='hidden lg:flex items-center space-x-2 border border-grey-100 p-2 cursor-pointer'>
+          <div className='relative h-5 w-5 flex-shrink-0'>
+            <Image objectFit='contain' src="https://pngset.com/images/reddit-logo-icon-free-download-stencil-pottery-symbol-silhouette-transparent-png-2207129.png" layout='fill' alt="" />
           </div>
           <p className='text-grey-400'>Sign In</p>
         </div>
+      ) }
+        
     </div>
   )
 }
