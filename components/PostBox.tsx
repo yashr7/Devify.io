@@ -16,7 +16,11 @@ type FormData = {
     subreddit: string;
 };
 
-const PostBox = () => {
+type Props = {
+    subreddit?: string;
+}
+
+const PostBox = ({ subreddit }: Props) => {
     const { data: session } = useSession();
 
     const [addPost] = useMutation(ADD_POST, {
@@ -45,7 +49,7 @@ const PostBox = () => {
             } = await client.query({
                 query: GET_SUBREDDIT_BY_TOPIC,
                 variables: {
-                    topic: formData.subreddit,
+                    topic: subreddit || formData.subreddit,
                 },
             });
             console.log(getSubredditListByTopic);
@@ -118,7 +122,7 @@ const PostBox = () => {
                     className="flex-1 rounded-md bg-gray-50 p-2 pl-5 outline-none"
                     type="text"
                     placeholder={
-                        session ? "Create a post by entering a title" : "Sign in to post"
+                        session ? subreddit ? `Create a post in r/${subreddit}` : "Create a post by entering a title" : "Sign in to post"
                     }
                 />
 
@@ -144,7 +148,7 @@ const PostBox = () => {
                     </div>
 
                     {/* Subreddit */}
-                    <div className="flex items-center px-2">
+                    {!subreddit && (<div className="flex items-center px-2">
                         <p className="min-w-[90px]">Subreddit: </p>
                         <input
                             className="m-2 flex-1 bg-blue-50 p-2 outline-none"
@@ -152,7 +156,7 @@ const PostBox = () => {
                             type="text"
                             placeholder="i.e NextJs"
                         />
-                    </div>
+                    </div>)}
 
                     {/* Image */}
                     {imageBoxOpen && (

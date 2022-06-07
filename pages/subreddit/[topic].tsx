@@ -2,6 +2,8 @@
 import { useRouter } from 'next/router'
 import React from 'react'
 import { Avatar } from '../../components/Avatar'
+import Feed from '../../components/Feed'
+import PostBox from '../../components/PostBox'
 
 const Subreddit = () => {
     const { query: { topic } } = useRouter()
@@ -12,11 +14,15 @@ const Subreddit = () => {
                     <div className='-mt-5'>
                         <Avatar seed={topic as string} large />
                     </div>
+                    <div className='py-2'>
+                        <h1 className='text-3xl font-semibold '>Welcome to the r/{topic} subreddit</h1>
+                        <p className='text-sm text-gray-400 '>r/{topic}</p>
+                    </div>
                 </div>
-                <div className='py-2'>
-                    <h1 className='text-3xl font-semibold '>Welcome to the r/{topic} subreddit</h1>
-                    <p className='text-sm text-gray-400 '>r/{topic}</p>
-                </div>
+            </div>
+            <div className='mx-auto max-w-5xl mt-5 pb-10 '>
+                <PostBox subreddit={topic as string} />
+                <Feed topic={topic as string} />
             </div>
         </div>
     )
