@@ -8,12 +8,11 @@ type Props = {
 }
 
 const Feed = ({ topic }: Props) => {
-    console.log(topic || "hi")
+    console.log(topic || "Getting post List (Post.tsx)")
     const { data, error } = !topic ? useQuery(GET_ALL_POSTS) : useQuery(GET_ALL_POSTS_BY_TOPIC, { variables: { topic: topic } });
 
-    console.log(data);
-
     const posts: Post[] = !topic ? data?.getPostList : data?.getPostListByTopic;
+    console.log(posts);
 
     return (
         <div className='mt-5 space-y-4'>

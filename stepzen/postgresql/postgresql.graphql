@@ -128,6 +128,17 @@ type Query {
       """
       configuration: "postgresql_config"
     )
+  getPostListByPostId(post_id: ID!): Post
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      select * from "post"
+      where "post"."id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+
   getPostListByTopic(topic: String!): [Post]
     @dbquery(
       type: "postgresql"
@@ -190,6 +201,15 @@ type Mutation {
       type: "postgresql"
       schema: "public"
       table: "subreddit"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+
+  insertComment(post_id: ID!, username: String!, text: String!): Comment
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "comment"
       dml: INSERT
       configuration: "postgresql_config"
     )

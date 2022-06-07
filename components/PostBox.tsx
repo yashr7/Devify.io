@@ -110,7 +110,7 @@ const PostBox = ({ subreddit }: Props) => {
     return (
         <form
             onSubmit={onSubmit}
-            className="stick top-16 z-50 bg-white border border-gray-300 rounded-md p-2"
+            className="sticky top-20 z-50 bg-white border border-gray-300 rounded-md p-2"
         >
             <div className="flex items-center space-x-3">
                 {/* Avatar */}
