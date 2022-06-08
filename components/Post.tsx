@@ -24,7 +24,7 @@ const Post = ({ post }: Props) => {
     const { data: session } = useSession()
     const [vote, setVote] = useState<boolean>()
 
-    const { data, loading } = useQuery(GET_ALL_VOTES_BY_POST_ID, {
+    const { data, loading, error } = useQuery(GET_ALL_VOTES_BY_POST_ID, {
         variables: {
             post_id: post?.id
         }
@@ -34,6 +34,13 @@ const Post = ({ post }: Props) => {
         refetchQueries: [GET_ALL_VOTES_BY_POST_ID, 'getVotesByPostId']
     })
 
+    useEffect(() => {
+        const votes: Vote[] = data?.getVotesByPostId
+
+        const vote = votes?.find(vote => vote.username === session?.user?.name)?.upvote
+        setVote(vote)
+    }, [data])
+
     const upVote = async (isUpvote: boolean) => {
         if (!session) {
             toast("You need to be logged in to vote!")
@@ -42,7 +49,7 @@ const Post = ({ post }: Props) => {
         if (vote && isUpvote) return;
         if (vote === false && !isUpvote) return;
 
-        console.log("Voting...");
+        console.log("Voting...", isUpvote);
 
         await addVote({
             variables: {
@@ -51,25 +58,18 @@ const Post = ({ post }: Props) => {
                 upvote: isUpvote
             }
         })
-    }
 
-    useEffect(() => {
-        const votes: Vote[] = data?.getVotesByPostId
-        const vote = votes?.find(vote => vote.username === session?.user?.name)?.upvote
-        setVote(vote)
-    }, [data])
+        console.log("Placed vote", data);
+    }
 
     const displayVotes = (data: any) => {
         const votes: Vote[] = data?.getVotesByPostId
         const displayNumber = votes?.reduce((total, vote) => (vote.upvote ? (total += 1) : (total -= 1)), 0)
-        if (votes.length === 0) return 0;
-        if (displayNumber === 0) {
-            return votes[0]?.upvote ? 1 : -1
-        }
-
+        // if (displayNumber === 0) {
+        //     return votes[0]?.upvote ? 1 : -1
+        // }
         return displayNumber
     }
-
 
     if (!post) return (
         <div className='flex w-full items-center justify-center p-10'>

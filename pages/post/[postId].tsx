@@ -65,7 +65,7 @@ const PostPage = () => {
                 <p className='text-sm'>Comment as <span className='text-red-500  '>{session?.user?.name}</span></p>
                 <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col pace-y-2'>
                     <textarea {...register('comment')} disabled={!session} className='h-24 rounded-md border border-gray-200 p-2 pl-4 outline-none disabled:bg-gray-50' placeholder={session ? 'What are your thoughts' : 'Please Sign in to comment'} />
-                    <button type='submit' className='rounded-full text-white bg-red-500 p-3 font-semibold disabled:bg-gray-200 '> Comment</button>
+                    <button disabled={!session} type='submit' className='rounded-full text-white bg-red-500 p-3 font-semibold disabled:bg-gray-200 '> Comment</button>
                 </form>
             </div>
             <div className='-my-5 rounded-b-md border border-t-0 border-gray-300 bg-white py-5 px-10'>
