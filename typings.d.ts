@@ -1,5 +1,4 @@
 // typings defination file
-
 type Comment = {
   created_at: DateTime;
   id: !ID;
@@ -32,5 +31,5 @@ type Post = {
   username: String;
   votes: [];
   comments: [];
-  subreddit: [];
+  subreddit;
 };
