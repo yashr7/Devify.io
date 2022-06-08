@@ -24,7 +24,7 @@ type Post {
       query: "getCommentsByPostId"
       arguments: [{ name: "post_id", field: "id" }]
     )
-  subreddit: Subreddit
+  subreddit: [Subreddit]
     @materializer(
       query: "getSubredditListById"
       arguments: [{ name: "id", field: "subreddit_id" }]
