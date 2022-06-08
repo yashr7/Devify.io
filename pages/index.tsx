@@ -22,9 +22,9 @@ const Home: NextPage = () => {
   console.log("subreddit", subreddit)
 
   return (
-    <div className="max-w-5xl my-7 mx-auto">
+    <div className="font-sans max-w-5xl my-7 mx-auto">
       <Head>
-        <title>Reddit clone</title>
+        <title>Devify.io</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 

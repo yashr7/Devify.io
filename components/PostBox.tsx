@@ -110,19 +110,18 @@ const PostBox = ({ subreddit }: Props) => {
     return (
         <form
             onSubmit={onSubmit}
-            className="sticky top-20 z-50 bg-white border border-gray-300 rounded-md p-2"
+            className="sticky top-16 z-50 bg-slate-900 border border-slate-800 rounded-md p-3"
         >
-            <div className="flex items-center space-x-3">
+            <div className="flex p-3 items-center space-x-3">
                 {/* Avatar */}
                 <Avatar />
-
                 <input
                     {...register("postTitle", { required: true })}
                     disabled={!session}
-                    className="flex-1 rounded-md bg-gray-50 p-2 pl-5 outline-none"
+                    className="flex-1 rounded-md bg-slate-800 p-2 pl-5  text-gray-300 outline-none"
                     type="text"
                     placeholder={
-                        session ? subreddit ? `Create a post in r/${subreddit}` : "Create a post by entering a title" : "Sign in to post"
+                        session ? subreddit ? `Create a post in r/${subreddit}` : "What's up? ..." : "Sign in to post"
                     }
                 />
 
@@ -132,41 +131,41 @@ const PostBox = ({ subreddit }: Props) => {
                     className={`h-6 text-gray-300 cursor-pointer ${imageBoxOpen && "text-blue-300"
                         }`}
                 />
-                <LinkIcon className="h-6 text-gray-300" />
+                {/* <LinkIcon className="h-6 text-gray-300" /> */}
             </div>
             {!!watch("postTitle") && (
                 <div className="flex flex-col py-2">
                     {/* Body */}
                     <div className="flex items-center px-2">
-                        <p className="min-w-[90px]">Body: </p>
+                        <p className="min-w-[90px] text-gray-300">Body: </p>
                         <input
-                            className="m-2 flex-1 bg-blue-50 p-2 outline-none"
+                            className="m-2 flex-1 bg-slate-800 p-2 outline-none"
                             {...register("postBody")}
                             type="text"
-                            placeholder="Text (optional)"
+                            placeholder="Text"
                         />
                     </div>
 
                     {/* Subreddit */}
                     {!subreddit && (<div className="flex items-center px-2">
-                        <p className="min-w-[90px]">Subreddit: </p>
+                        <p className="min-w-[90px] text-gray-300">Subreddit: </p>
                         <input
-                            className="m-2 flex-1 bg-blue-50 p-2 outline-none"
+                            className="m-2 flex-1 bg-slate-800 p-2 outline-none"
                             {...register("subreddit", { required: true })}
                             type="text"
-                            placeholder="i.e NextJs"
+                            placeholder="e.g. NextJs"
                         />
                     </div>)}
 
                     {/* Image */}
                     {imageBoxOpen && (
                         <div className="flex items-center px-2">
-                            <p className="min-w-[90px]">Image URL: </p>
+                            <p className="min-w-[90px] text-gray-300">Image URL: </p>
                             <input
-                                className="m-2 flex-1 bg-blue-50 p-2 outline-none"
+                                className="m-2 flex-1 bg-slate-800 p-2 outline-none"
                                 {...register("postImage")}
                                 type="text"
-                                placeholder="Optional..."
+                                placeholder="( optional )"
                             />
                         </div>
                     )}
@@ -185,16 +184,18 @@ const PostBox = ({ subreddit }: Props) => {
 
                     {/* Create Post Button */}
                     {!!watch("postTitle") && (
-                        <button
-                            type="submit"
-                            className="w-full rounded-full bg-blue-400 p-2 text-white"
-                        >
-                            Create Post
-                        </button>
+                        <div className="flex items-center justify-center mt-4">
+                            <button type="submit" className="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-500 to-pink-500 group-hover:from-purple-500 group-hover:to-pink-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800">
+                                <span className="w-full relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0 font-semibold">
+                                    Create Post
+                                </span>
+                            </button>
+                        </div>
                     )}
                 </div>
-            )}
-        </form>
+            )
+            }
+        </form >
     );
 };
 

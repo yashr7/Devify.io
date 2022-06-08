@@ -5,6 +5,7 @@ import {
   HomeIcon,
   SearchIcon,
   MenuIcon,
+
 } from "@heroicons/react/solid";
 import {
   BellIcon,
@@ -14,6 +15,9 @@ import {
   SparklesIcon,
   SpeakerphoneIcon,
   VideoCameraIcon,
+  UserIcon,
+  UserAddIcon,
+  ArrowCircleRightIcon,
 } from "@heroicons/react/outline";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
@@ -22,25 +26,21 @@ const Header = () => {
   const { data: session } = useSession();
 
   return (
-    <div className="sticky items-center top-0 z-50 flex bg-white px-4 py-2 shadow-sm">
-      <div className="relative h-10 w-20 flex-shrink-0 cursor-pointer ">
+    <div className="sticky items-center s justify-between top-0 z-50 flex bg-gradient-to-r to-gray-800 via-gray-900 from-black px-4 py-2 shadow-sm">
+      <div className="relative ml-5 h-10 w-30 flex-shrink-0 cursor-pointer ">
         <Link href="/" >
-          <Image
-            objectFit="contain"
-            src="https://www.pngitem.com/pimgs/m/543-5439256_apollo-app-icon-apollo-reddit-app-icon-hd.png"
-            layout="fill"
-          />
+          <h1
+            className="font-bold text-transparent text-2xl bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 hover:bg-gradient-to-r hover:from-white hover:via-fuchsia-300 hover:to-slate-400"
+          >
+            DEVIFY.IO
+          </h1>
         </Link>
       </div>
 
-      <div className="flex items-center mx-7 xl:min-w-{300px}">
-        <HomeIcon className="h-5 w-5" />
-        <p className="flex-1 ml-2 hidden lg:inline">Home</p>
-        <ChevronDownIcon className="h-5 w-5" />
-      </div>
 
       {/* Search */}
-      <form className="flex flex-1 items-center space-x-2 border rounded-lg px-3 py-1 bg-gray-100 border-gray-100">
+
+      {/* <form className="flex flex-1 items-center space-x-2 border rounded-lg px-3 py-1 bg-gray-100 border-gray-100">
         <SearchIcon className="h-5 w-6 text-gray-400" />
         <input
           className="flex-1 bg-transparent outline-none"
@@ -62,46 +62,41 @@ const Header = () => {
       </div>
       <div className="ml-5 flex items-center lg:hidden">
         <MenuIcon className="icon" />
-      </div>
+      </div> */}
+
+
       {/* Sign In / Sign Out button */}
 
-      {session ? (
-        <div
-          onClick={() => signOut()}
-          className="hidden lg:flex items-center space-x-2 border border-gray-100 p-2 cursor-pointer"
-        >
-          <div className="relative h-5 w-5 flex-shrink-0">
-            <Image
-              objectFit="contain"
-              src="https://pngset.com/images/reddit-logo-icon-free-download-stencil-pottery-symbol-silhouette-transparent-png-2207129.png"
-              layout="fill"
-              alt=""
-            />
+      {
+        session ? (
+          <div
+            onClick={() => signOut()}
+            className="flex mr-5 p-2 items-center space-x-2 cursor-pointer border-2 border-pink-500/50 text-transparent bg-clip-text bg-gradient-to-tr from-rose-400 via-red-300 to-cyan-400 hover:bg-gradient-to-r hover:from-white hover:via-fuchsia-300 hover:to-slate-400 rounded-md"
+          >
+            <div className="relative h-5 w-5 flex-shrink-0 ">
+              <UserIcon className="text-emerald-400 " />
+            </div>
+            <div className="flex space-x-1 flex-1 text-xs items-center">
+              <p className="text-x font-bold truncate">{session?.user?.name}</p>
+              <p className="font-semibold text-sm">
+                <ArrowCircleRightIcon className="text-rose-400 w-5 h-5" />
+              </p>
+            </div>
           </div>
-          <div className="flex-1 text-xs">
-            <p className="truncate">{session?.user?.name}</p>
-            <p className="text-gray-400">Sign Out</p>
+        ) : (
+          <div
+            onClick={() => signIn()}
+            className="flex mr-5 p-2 items-center space-x-2 cursor-pointer border-2 border-pink-500/50 text-transparent bg-clip-text bg-gradient-to-tr from-rose-400 via-red-300 to-cyan-400 hover:bg-gradient-to-r hover:from-white hover:via-fuchsia-300 hover:to-slate-400 rounded-md"
+          >
+            <div className="relative h-5 w-5 flex-shrink-0">
+              <UserAddIcon className="text-rose-400" />
+            </div>
+            <p className="text-xs font-semibold">Sign In</p>
+            <ArrowCircleRightIcon className="text-emerald-300 w-5 h-5" />
           </div>
-
-          <ChevronDownIcon className="h-5 flex-shrink-0 text-gray-400" />
-        </div>
-      ) : (
-        <div
-          onClick={() => signIn()}
-          className="hidden lg:flex items-center space-x-2 border border-gray-100 p-2 cursor-pointer"
-        >
-          <div className="relative h-5 w-5 flex-shrink-0">
-            <Image
-              objectFit="contain"
-              src="https://pngset.com/images/reddit-logo-icon-free-download-stencil-pottery-symbol-silhouette-transparent-png-2207129.png"
-              layout="fill"
-              alt=""
-            />
-          </div>
-          <p className="text-gray-400">Sign In</p>
-        </div>
-      )}
-    </div>
+        )
+      }
+    </div >
   );
 };
 
