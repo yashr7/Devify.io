@@ -89,7 +89,7 @@ const Post = ({ post }: Props) => {
                 <div className='p-3 pb-1'>
                     {/* Header */}
                     <div className='flex items-center space-x-2'>
-                        <Avatar seed={post.subreddit[0]?.topic} />
+                        <Avatar seed={post.subreddit[0]?.topic as string} />
                         <p className='text-xs text-gray-400'>
                             <Link href={`/subreddit/${post.subreddit[0]?.topic}`}>
                                 <span className='font-bold text-black hover:text-blue-400 hover:underline '>r/{post.subreddit[0]?.topic}</span>

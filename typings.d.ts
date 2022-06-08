@@ -29,7 +29,7 @@ type Post = {
   subreddit_id: ID;
   title: String;
   username: String;
-  votes: [];
-  comments: [];
-  subreddit;
+  votes: Vote[];
+  comments: Comments[];
+  subreddit: Subreddit[];
 };
