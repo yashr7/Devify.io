@@ -1,9 +1,8 @@
 import { useQuery } from '@apollo/client'
+import { MrMiyagi } from '@uiball/loaders'
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import Image from 'next/image'
 import Feed from '../components/Feed'
-import Header from '../components/Header'
 import PostBox from '../components/PostBox'
 import SubredditRow from '../components/SubredditRow'
 import { GET_SUBREDDIT_WITH_LIMIT } from '../graphql/queries'
@@ -22,7 +21,7 @@ const Home: NextPage = () => {
   console.log("subreddit", subreddit)
 
   return (
-    <div className="font-sans max-w-5xl my-7 mx-auto">
+    <div className="font-sans max-w-5xl my-5 mx-auto">
       <Head>
         <title>Devify.io</title>
         <link rel="icon" href="/favicon.ico" />
@@ -34,14 +33,22 @@ const Home: NextPage = () => {
       <div className='flex'>
         {/* Feed */}
         <Feed />
-        <div className='top-36 mx-5 mt-5 hidden h-fit min-w-[300px] rounded-md border border-gray-300 bg-white lg:inline'>
-          <p className='text-md mb-1 p-4 pb-3 font-bold'>Top Communities</p>
-          <div>
+        <div className='sticky top-40 mx-5 mt-5 hidden h-fit min-w-[300px] rounded-md border border-slate-700 bg-slate-900 lg:inline'>
+          <p className='text-md mb-1 p-4 pb-3 font-bold text-white'>Top Communities</p>
+          {subreddit ? (<div>
             {/* List subreddits */}
             {subreddit?.map((subreddit, i) => (
               <SubredditRow key={subreddit.id} topic={subreddit.topic as string} index={i} />
             ))}
-          </div>
+          </div>) : (<div className='flex w-full items-center justify-center p-10'>
+            <MrMiyagi
+              size={30}
+              lineWeight={3.5}
+              speed={1.5}
+              color="#FB7185"
+            />
+          </div>)}
+
         </div>
       </div>
     </div>

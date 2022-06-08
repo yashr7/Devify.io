@@ -12,6 +12,6 @@
     }
 
     .postButtons{
-        @apply flex items-center space-x-1 text-sm font-semibold p-2 hover:bg-gray-100 cursor-pointer rounded-sm
+        @apply flex items-center space-x-2 text-sm font-semibold p-2 cursor-pointer rounded-sm
     }
 }
