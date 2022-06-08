@@ -17,7 +17,7 @@ export const Avatar = ({ seed, large }: Props) => {
         >
             <Image
                 layout="fill"
-                src={`https://avatars.dicebear.com/api/open-peeps/${seed || session?.user?.name || "placeholder"
+                src={`https://avatars.dicebear.com/api/bottts/${seed || session?.user?.name || "placeholder"
                     }.svg`}
             />
         </div>

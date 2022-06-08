@@ -73,7 +73,7 @@ const Post = ({ post }: Props) => {
         <Link href={`/post/${post.id}`}>
             <div className='flex cursor-pointer border rounded-md border-slate-700 bg-slate-900 shadow-sm hover:border-slate-900'>
                 {/* Votes */}
-                <div className='flex flex-col items-center justify-start space-y-1 rounded-l-md bg-slate-800 p-4 text-gray-400'>
+                <div className='flex flex-col items-center justify-start space-y-1 rounded-l-md bg-slate-800 p-4 text-slate-400'>
                     <ArrowUpIcon onClick={() => upVote(true)} className={`voteButtons hover:text-blue-400 ${vote && 'text-blue-400'}`} />
                     <p className='text-white text-xs font-bold'>{displayVotes(data)}</p>
                     <ArrowDownIcon onClick={() => upVote(false)} className={`voteButtons hover:text-red-400 ${vote === false && 'text-red-400'}`} />
